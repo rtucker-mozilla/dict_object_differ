@@ -55,27 +55,35 @@ class testDictObjectDiffer(unittest.TestCase):
 
     def test1_object_equals_dict(self):
         test_dict = {
-                'foo': 'foo'
+            'foo': 'foo'
         }
         """ We haven't added a foo attribute to our gen_obj
             so dod.missing_from_object should include {'foo': 'bar'}
         """
         setattr(self.gen_obj, 'foo', 'foo')
-            
         dod = DictObjectDiffer(test_dict, self.gen_obj, {'foo': 'foo'})
-        self.assertEqual(dod._missing_from_object(test_dict, self.gen_obj, {'foo': 'foo'}), {})
+        self.assertEqual(
+            dod._missing_from_object(test_dict, self.gen_obj, {'foo': 'foo'}),
+            {}
+        )
 
     def test2_object_missing_attribute(self):
         test_dict = {
-                'foo': 'foo'
+            'foo': 'foo'
         }
         """ We haven't added a foo attribute to our gen_obj
             so dod.missing_from_object should include {'foo': 'bar'}
         """
-            
         dod = DictObjectDiffer(test_dict, self.gen_obj, {'foo': 'foo'})
-        self.assertEqual(dod._missing_from_object(test_dict, self.gen_obj, {'foo': 'foo'}), {'foo': 'foo'})
-        
+        self.assertEqual(
+            dod._missing_from_object(
+                test_dict,
+                self.gen_obj,
+                {'foo': 'foo'}
+            ),
+            {'foo': 'foo'}
+        )
+
     def test3_dict_missing_key(self):
         test_dict = {}
         """ We haven't added a foo attribute to our gen_obj
@@ -83,32 +91,42 @@ class testDictObjectDiffer(unittest.TestCase):
         """
         setattr(self.gen_obj, 'foo', 'foo')
         dod = DictObjectDiffer(test_dict, self.gen_obj, {'foo': 'foo'})
-        self.assertEqual(dod._missing_from_dict(test_dict, self.gen_obj, {'foo': 'foo'}), {'foo': 'foo'})
+        self.assertEqual(
+            dod._missing_from_dict(
+                test_dict,
+                self.gen_obj,
+                {'foo': 'foo'}
+            ),
+            {'foo': 'foo'}
+        )
 
-    #def test4_object_and_dict_differ(self):
-    #    test_dict = {
-    #            'foo': 'bar',
-    #    }
-    #    setattr(self.gen_obj, 'foo', 'baz')
-    #    dod = DictObjectDiffer(test_dict, self.gen_obj, {'foo': 'foo'})
-    #    dict_difference, object_difference = dod._compare_dict_to_object(test_dict, self.gen_obj, {'foo': 'foo'})
-    #    self.assertEqual(dict_difference, {'foo': 'baz'})
-    #    self.assertEqual(object_difference, {'foo': 'bar'})
+    def test4_object_and_dict_differ(self):
+        test_dict = {
+            'foo': 'bar',
+        }
+        setattr(self.gen_obj, 'foo', 'baz')
+        dod = DictObjectDiffer(test_dict, self.gen_obj, {'foo': 'foo'})
+        dict_difference, object_difference = \
+            dod._compare_dict_to_object(
+                test_dict, self.gen_obj,
+                {'foo': 'foo'}
+            )
+        self.assertEqual(dict_difference, {'foo': 'baz'})
+        self.assertEqual(object_difference, {'foo': 'bar'})
 
     def test5_full_integration_test_missing_from_dict(self):
         test_dict = {
-                'foo': 'bar',
-                'aaa': 'bbb',
-                'ccc': 'bbb',
-                'zzz': 'zzz',
+            'foo': 'bar',
+            'aaa': 'bbb',
+            'ccc': 'bbb',
+            'zzz': 'zzz',
         }
         compare_dict = {
-                'foo': 'foo',
-                'aaa': 'aaa',
-                'ccc': 'ccc',
-                'yyy': 'yyy',
-                'zzz': 'zzz',
-
+            'foo': 'foo',
+            'aaa': 'aaa',
+            'ccc': 'ccc',
+            'yyy': 'yyy',
+            'zzz': 'zzz',
         }
         setattr(self.gen_obj, 'foo', 'bar')
         setattr(self.gen_obj, 'aaa', 'zzz')
