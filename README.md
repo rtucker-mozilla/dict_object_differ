@@ -10,7 +10,7 @@ foo = {'foo': 'bar'}
 
 bar = CustomObject()
 
-""" compare map is a mapping of dictionary keys in dict_diff to object_diff
+compare map is a mapping of dictionary keys in dict_diff to object_diff
 
 compare_map = {'foo': 'foo'}
 
