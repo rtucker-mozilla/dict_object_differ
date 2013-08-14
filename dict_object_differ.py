@@ -5,11 +5,27 @@ class DictObjectDiffer(object):
     diff_dict = []
     diff_object = None
     compare_map = {}
+    """ missing_from_dict: attributes that exist in the object,
+        but not the dict.  key is the what the keyshould be
+        dictionary value is what the dictionary value should be
+    """
     missing_from_dict = {}
-    added_to_dict = {}
+
+    """ missing_from_object: objects that exist in the dict,
+        but not the object.  key is the what the attribute name should be
+        dictionary value is what the attribute value should be
+    """
     missing_from_object = {}
-    added_to_object = {}
+
+    """ missing_from_object: objects that exist in the object, but not the
+        dict. Key is the what the attribute name should be
+        dictionary value is what the attribute value should be
+    """
     dict_difference = {}
+
+    """ object_difference: the key is the local key and the value is
+        what the value is in the dict
+    """
     object_difference = {}
 
     def __init__(
