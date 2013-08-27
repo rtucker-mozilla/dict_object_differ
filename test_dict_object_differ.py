@@ -149,6 +149,15 @@ class testDictObjectDiffer(unittest.TestCase):
             'zzz': 'zzz',
         })
 
+    def test6_dict_missing_key(self):
+        test_dict = {
+            'foo': 'bar',
+        }
+        setattr(self.gen_obj, 'doesntexistindict', 'baz')
+        dod = DictObjectDiffer(test_dict, self.gen_obj, {'doesntexistindict': 'foo'})
+        missing_from_object = dod._missing_from_object()
+        self.assertEqual(missing_from_object, {'doesntexistindict': ''})
+
 
 if __name__ == '__main__':
     unittest.main()

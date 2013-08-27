@@ -139,7 +139,10 @@ class DictObjectDiffer(object):
 
         for k in compare_map.iterkeys():
             if not hasattr(diff_object, compare_map[k]):
-                return_dict[k] = diff_dict[k]
+                try:
+                    return_dict[k] = diff_dict[k]
+                except KeyError:
+                    return_dict[k] = ''
 
         return return_dict
 
