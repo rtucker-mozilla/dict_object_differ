@@ -173,6 +173,6 @@ class DictObjectDiffer(object):
         for k in compare_map.iterkeys():
             if hasattr(diff_object, compare_map[k]) \
                     and not k in diff_dict:
-                return_dict[k] = k
+                return_dict[k] = getattr(diff_object, compare_map[k])
 
         return return_dict

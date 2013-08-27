@@ -89,7 +89,7 @@ class testDictObjectDiffer(unittest.TestCase):
         """ We haven't added a foo attribute to our gen_obj
             so dod.missing_from_object should include {'foo': 'bar'}
         """
-        setattr(self.gen_obj, 'foo', 'foo')
+        setattr(self.gen_obj, 'foo', 'bar')
         dod = DictObjectDiffer(test_dict, self.gen_obj, {'foo': 'foo'})
         self.assertEqual(
             dod._missing_from_dict(
@@ -97,7 +97,7 @@ class testDictObjectDiffer(unittest.TestCase):
                 self.gen_obj,
                 {'foo': 'foo'}
             ),
-            {'foo': 'foo'}
+            {'foo': 'bar'}
         )
 
     def test4_object_and_dict_differ(self):
